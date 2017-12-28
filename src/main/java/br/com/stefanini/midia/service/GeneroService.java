@@ -6,9 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.stefanini.midia.dto.FilmeDto;
 import br.com.stefanini.midia.dto.GeneroDto;
+import br.com.stefanini.midia.model.Filme;
 import br.com.stefanini.midia.model.Genero;
 import br.com.stefanini.midia.repository.GeneroRepository;
+import br.com.stefanini.midia.utils.FilmeConversor;
 import br.com.stefanini.midia.utils.GeneroConversor;
 
 @Service
@@ -17,8 +20,8 @@ public class GeneroService {
 	@Autowired
 	private GeneroRepository generoRepository;
 	
-	public void save(GeneroDto genero) {
-		generoRepository.save(GeneroConversor.generoDtoParaModel(genero));
+	public GeneroDto save(GeneroDto genero) {
+		return GeneroConversor.generoModelParaDto(generoRepository.save(GeneroConversor.generoDtoParaModel(genero)));
 	}
 	
 	public void delete(Long id) {
@@ -30,6 +33,14 @@ public class GeneroService {
 	
 	public List<GeneroDto> findAll(){
 		return GeneroConversor.generoModelParaDto(generoRepository.findAll());
+	}
+	
+	public GeneroDto findByIdDto(Long id) {
+		Genero genero = this.findById(id);
+		if( genero != null) {
+			return GeneroConversor.generoModelParaDto(genero);
+		}
+		return null;
 	}
 	
 	public Genero findById(Long id) {
