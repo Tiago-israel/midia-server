@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.stefanini.midia.dto.FilmeDto;
@@ -35,8 +36,8 @@ public class FilmeService {
 		return FilmeConversor.filmeModelParaDto(filmeRepository.findByTituloContaining(busca));
 	}
 	
-	public List<FilmeDto>findAll(){
-		return FilmeConversor.filmeModelParaDto(filmeRepository.findAll());			
+	public List<FilmeDto>findAll(Pageable pageable){
+		return FilmeConversor.filmeModelParaDto(filmeRepository.findAll(pageable));			
 	}
 	
 	public FilmeDto findByIdDto(Long id) {

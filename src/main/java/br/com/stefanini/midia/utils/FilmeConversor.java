@@ -12,7 +12,7 @@ public class FilmeConversor {
 		return new FilmeDto(filme);
 	}
 
-	public static List<FilmeDto> filmeModelParaDto(List<Filme> filmes) {
+	public static List<FilmeDto> filmeModelParaDto(Iterable<Filme> filmes) {
 		List<FilmeDto> filmesDto = new ArrayList<FilmeDto>();
 		filmes.forEach(filme -> {
 			filmesDto.add(filmeModelParaDto(filme));
